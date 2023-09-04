@@ -32,6 +32,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${OpenCV_INCLUDE_DIRS})
 
 # 添加源文件， 生成库
 add_library(camModule SHARED
+  src/camLane.cpp
   src/camSyn.cpp  
   src/longCam.cpp 
   src/shortCam.cpp 
@@ -61,9 +62,11 @@ target_include_directories(camModule PUBLIC
 )
 
 add_executable(camOpen src/camOpen.cpp)
+add_executable(laneDetect src/laneDetect.cpp)
 
 # 链接自己的库与可执行文件
 target_link_libraries(camOpen camModule)
+target_link_libraries(laneDetect camModule)
 
 ament_package()
 
@@ -77,7 +80,8 @@ install(TARGETS
 
 #安装可执行文件
 install(TARGETS 
-  camOpen 
+  camOpen
+  laneDetect 
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -35,18 +35,18 @@ shortCam::~shortCam() {
     
     cap.release();
 
-    cv::destroyAllWindows();
+    // cv::destroyAllWindows();
 }
 
 void shortCam::readImage() {
 
-    cv::namedWindow("Short Focal Camera", 1);
+    // cv::namedWindow("Short Focal Camera", 1);
 
     while(rclcpp::ok()) {
         
         cap.read(image);
 
-        if (!image.empty()) cv::imshow("Short Focal Camera", image); 
+        // if (!image.empty()) cv::imshow("Short Focal Camera", image); 
 
         cv::waitKey(5);
     }
