@@ -23,11 +23,17 @@ find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(OpenCV REQUIRED)
 
+# Torch Library
+list(APPEND CMAKE_PREFIX_PATH "/home/jack/miniconda3/envs/lane-det/lib/python3.7/site-packages/torch/share/cmake/Torch")  # libtorch
+find_package(Torch REQUIRED)
+message(STATUS "Torch version is: ${Torch_VERSION}")
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# 添加头文件地址
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${OpenCV_INCLUDE_DIRS})
 
 # 添加源文件， 生成库

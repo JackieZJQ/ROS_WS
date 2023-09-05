@@ -25,8 +25,6 @@ shortCam::shortCam(const std::string &name):Node(name) {
     runPubcam = std::make_shared<std::thread>(std::bind(&shortCam::publishImage, this));
     runPubcam->join();
     
-
-    // TO-DO ?
     // 定时器 Publish
     // timer_ = this->create_wall_timer(std::chrono::milliseconds(500), std::bind(&TopicPublisher01::timer_callback, this));
 }
@@ -48,7 +46,7 @@ void shortCam::readImage() {
 
         // if (!image.empty()) cv::imshow("Short Focal Camera", image); 
 
-        cv::waitKey(5);
+        cv::waitKey(2);
     }
 }
 
@@ -67,11 +65,10 @@ void shortCam::publishImage() {
             
         } catch (cv_bridge::Exception& e) {
             
-            // TO-DO ?
             RCLCPP_ERROR(this->get_logger(), "cv_bridge exception: %s", e.what());
             return;
         }
 
-        cv::waitKey(5);
+        cv::waitKey(2);
     }   
 }

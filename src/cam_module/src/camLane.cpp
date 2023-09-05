@@ -23,12 +23,11 @@ void camLane::shortImagecallback(const sensor_msgs::msg::Image::SharedPtr image)
         
         auto cvPtr = cv_bridge::toCvCopy(image, sensor_msgs::image_encodings::BGR8);
 
-        cv::imshow("Test Window", cvPtr->image);
-        cv::waitKey(5);
+        // cv::imshow("Test Window", cvPtr->image);
+        cv::waitKey(2);
 
     } catch (cv_bridge::Exception& e) {
       
-      // TO-DO ?
       RCLCPP_ERROR(this->get_logger(), "cv_bridge exception: %s", e.what());
       return;
     }
