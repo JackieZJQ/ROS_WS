@@ -22,7 +22,7 @@ public:
 
 private:
     // rclcpp::callback_group::CallbackGroup::SharedPtr shortImagecallbackGroup;
-    //cv_bridge::CvImagePtr cvPtr;
+    // cv_bridge::CvImagePtr cvPtr;
 
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr shortImagesub;
 

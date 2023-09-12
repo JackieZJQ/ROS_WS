@@ -18,7 +18,6 @@ camLane::camLane(const std::string &name):Node(name) {
     std::cout << "Loading " << networkName << std::endl;
     module = torch::jit::load(networkName);
     std::cout << "Loaded" << std::endl;
-    
 }
 
 camLane::~camLane() {
