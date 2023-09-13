@@ -14,10 +14,10 @@ camLane::camLane(const std::string &name):Node(name) {
     if (cudaAvailable) RCLCPP_INFO(this->get_logger(), "---CUDA available! Predicting on GPU---");
 
     // 加载模型
-    std::string networkName = "";
-    std::cout << "Loading " << networkName << std::endl;
-    module = torch::jit::load(networkName);
-    std::cout << "Loaded" << std::endl;
+    // std::string networkName = "";
+    // std::cout << "Loading " << networkName << std::endl;
+    // module = torch::jit::load(networkName);
+    // std::cout << "Loaded" << std::endl;
 }
 
 camLane::~camLane() {
