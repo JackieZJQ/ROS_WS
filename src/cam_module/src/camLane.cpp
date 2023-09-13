@@ -13,11 +13,19 @@ camLane::camLane(const std::string &name):Node(name) {
     bool cudaAvailable = torch::cuda::is_available();
     if (cudaAvailable) RCLCPP_INFO(this->get_logger(), "---CUDA available! Predicting on GPU---");
 
+    // 设置推理设备
+    torch::DeviceType device_type;
+    
+    if (cudaAvailable) device_type = torch::kCUDA;
+    else device_type = torch::kCPU;
+
+    torch::Device device(device_type);
+
     // 加载模型
-    // std::string networkName = "";
-    // std::cout << "Loading " << networkName << std::endl;
-    // module = torch::jit::load(networkName);
-    // std::cout << "Loaded" << std::endl;
+    std::string networkName = "/home/ubuntu/JiaqiZhang/ROS_WS/model/culane_model.pt";
+    std::cout << "Loading " << networkName << std::endl;
+    module = torch::jit::load(networkName, device);
+    std::cout << "Loaded" << std::endl;
 }
 
 camLane::~camLane() {
@@ -27,17 +35,13 @@ camLane::~camLane() {
 
 void camLane::shortImagecallback(const sensor_msgs::msg::Image::SharedPtr image) {
 
-    // 设置推理设备
-    torch::DeviceType device_type;
-    
-    if (torch::cuda::is_available() == true) device_type = torch::kCUDA;
-    else device_type = torch::kCPU;
 
-    torch::Device device(device_type);
 
     try {
         
         auto cvPtr = cv_bridge::toCvCopy(image, sensor_msgs::image_encodings::BGR8);
+
+        forward(cvPtr->image);
 
         cv::imshow("Test Window", cvPtr->image);
         cv::waitKey(2);
@@ -48,3 +52,19 @@ void camLane::shortImagecallback(const sensor_msgs::msg::Image::SharedPtr image)
       return;
     }
 }
+
+void camLane::forward(const cv::InputArray &_image) {
+
+    if (_image.empty()) return;
+
+    cv::Mat image = _image.getMat();
+
+    std::cout << image.size() << std::endl;
+
+
+}
+
+void camLane::pred2coords() {
+
+}
+

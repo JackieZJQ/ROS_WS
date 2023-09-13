@@ -20,6 +20,8 @@ public:
 
     void shortImagecallback(const sensor_msgs::msg::Image::SharedPtr image);
 
+    void pred2coords();
+
 private:
     // rclcpp::callback_group::CallbackGroup::SharedPtr shortImagecallbackGroup;
     // cv_bridge::CvImagePtr cvPtr;
