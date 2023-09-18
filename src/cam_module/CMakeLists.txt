@@ -24,7 +24,7 @@ find_package(cv_bridge REQUIRED)
 find_package(OpenCV REQUIRED)
 
 # Torch Library
-list(APPEND CMAKE_PREFIX_PATH "/home/ubuntu/Softwares/libtorch/share/cmake/Torch")  # libtorch
+list(APPEND CMAKE_PREFIX_PATH "~/Softwares/libtorch/share/cmake/Torch")  # libtorch
 find_package(Torch REQUIRED)
 message(STATUS "Torch version is: ${Torch_VERSION}")
 
