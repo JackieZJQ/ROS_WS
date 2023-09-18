@@ -86,7 +86,7 @@ void camLane::forward(const cv::Mat &_image) {
     auto outputs = module.forward(inputs).toGenericDict();
     
     std::vector<std::vector<std::pair<int, int>>> coords;
-    coords = pred2coords(outputs);
+    // coords = pred2coords(outputs);
     
 
     // std::cout << image.type() << std::endl;
@@ -96,40 +96,41 @@ void camLane::forward(const cv::Mat &_image) {
     cv::waitKey(2);
 }
 
-std::vector<std::vector<std::pair<int, int>>> camLane::pred2coords(const c10::impl::GenericDict &preds) {
+// std::vector<std::vector<std::pair<int, int>>> camLane::pred2coords(const c10::impl::GenericDict &preds) {
 
     // toTensor
-    auto loc_row = preds.at("loc_row").toTensor();
-    auto loc_col = preds.at("loc_col").toTensor();
-    auto exist_row = preds.at("exist_row").toTensor();
-    auto exist_col = preds.at("exist_row").toTensor();
+    // auto loc_row = preds.at("loc_row").toTensor();
+    // auto loc_col = preds.at("loc_col").toTensor();
+    // auto exist_row = preds.at("exist_row").toTensor();
+    // auto exist_col = preds.at("exist_row").toTensor();
 
     // batch_size_row, num_grid_row, num_cls_row, num_lane_row 
-    int batch_size_row =  loc_row.sizes()[0];
-    int num_grid_row = loc_row.sizes()[1]; 
-    int num_cls_row = loc_row.sizes()[2];
-    int num_lane_row = loc_row.sizes()[3];
+    // int batch_size_row =  loc_row.sizes()[0];
+    // int num_grid_row = loc_row.sizes()[1]; 
+    // int num_cls_row = loc_row.sizes()[2];
+    // int num_lane_row = loc_row.sizes()[3];
 
     // batch_size_col, num_grid_col, num_cls_col, num_lane_col
-    int batch_size_col = loc_col.sizes()[0];
-    int num_grid_col = loc_col.sizes()[1]; 
-    int num_cls_col = loc_col.sizes()[2];
-    int num_lane_col = loc_col.sizes()[3];
+    // int batch_size_col = loc_col.sizes()[0];
+    // int num_grid_col = loc_col.sizes()[1]; 
+    // int num_cls_col = loc_col.sizes()[2];
+    // int num_lane_col = loc_col.sizes()[3];
 
-    auto max_indices_row = loc_row.argmax(1);
-    auto valid_row = exist_row.argmax(1);
+    // auto max_indices_row = loc_row.argmax(1);
+    // auto valid_row = exist_row.argmax(1);
 
     // std::cout << valid_row << std::endl;
 
-    auto max_indices_col = loc_col.argmax(1);
-    auto valid_col = exist_col.argmax(1);
+    // auto max_indices_col = loc_col.argmax(1);
+    // auto valid_col = exist_col.argmax(1);
 
     // initlize result
-    std::vector<std::vector<std::pair<int, int>>> res;
-    int row_lane_idx[2] = {1, 2};
-    int col_lane_idx[2] = {0, 3};
+    // std::vector<std::vector<std::pair<int, int>>> res;
+    // int row_lane_idx[2] = {1, 2};
+    // int col_lane_idx[2] = {0, 3};
     
-    std::cout << valid_row.index({0, torch::indexing::Slice(torch::indexing::None, torch::indexing::None), 1}).sum() << std::endl;
+    // std::cout << valid_row.index({0, torch::indexing::Slice(torch::indexing::None, torch::indexing::None), 1}).sum() << std::endl;
+    // std::cout << valid_row.sizes()[1] << std::endl;
 
     // for (int i: row_lane_idx) {
     //     std::vector<std::pair<int, int>> tmp;
@@ -141,6 +142,6 @@ std::vector<std::vector<std::pair<int, int>>> camLane::pred2coords(const c10::im
 
     // }
 
-    return res;
-}
+    // return res;
+// }
 
