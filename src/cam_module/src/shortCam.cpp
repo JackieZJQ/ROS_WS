@@ -11,7 +11,7 @@ shortCam::shortCam(const std::string &name):Node(name) {
     cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480); 
 
     // 打开相机设备
-    int deviceID = 2;
+    int deviceID = 0;
     cap.open(deviceID);
 
     if (!cap.isOpened()) RCLCPP_INFO(this->get_logger(), "---无法打开短焦摄像机---");

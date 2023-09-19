@@ -35,14 +35,12 @@ camLane::~camLane() {
 
 void camLane::shortImagecallback(const sensor_msgs::msg::Image::SharedPtr image) {
 
-
-
     try {
         
         auto cvPtr = cv_bridge::toCvCopy(image, sensor_msgs::image_encodings::BGR8);
 
         cv::imshow("Test Window", cvPtr->image);
-
+        cv::waitKey(2);
         // camLane::forward(cvPtr->image);
 
 
